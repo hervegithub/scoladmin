@@ -95,8 +95,59 @@
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col">
-      <div class="card shadow border-0">
-        <div id="map-canvas" class="map-canvas" data-lat="40.748817" data-lng="-73.985428" style="height: 600px;"></div>
+      <div class="card shadow border-0 content-form">
+        <form>
+          <div class="form-group">
+            <label for="inputAddress">Denomination</label>
+            <input type="text" class="form-control" id="inputDenomination">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Email</label>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Telephone</label>
+              <input type="tel" class="form-control" id="inputPassword4" placeholder="Telephone">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="Quartier, details de localisation">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Administrateur</label>
+            <input type="text" class="form-control" id="inputAddress2" placeholder="Nom de l'administrateur">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">City</label>
+              <select id="inputState" class="form-control" >
+                  <option >Ecole publique</option>
+                  <option selected>Ecole privée</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">State</label>
+              <select id="inputState" class="form-control" >
+                <option *ngFor="let ville of villes ; let i:index">{{ville}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck">
+              <label class="form-check-label" for="gridCheck">
+                Compte premium ?
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
       </div>
     </div>
   </div>

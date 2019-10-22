@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SchoolFormComponent } from '../pages/school-form/school-form.component';
 
 @NgModule({
   imports: [
@@ -15,12 +16,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
   ]
 })
 export class ComponentsModule { }
