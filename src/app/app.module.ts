@@ -1,3 +1,4 @@
+import { SchoolServiceService } from './share/school-service/school-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { SchoolFormComponent } from './pages/school-form/school-form.component';
+import * as firebase from "firebase";
 
 let  config = {
   apiKey: "AIzaSyD_CDzLe7ejPZXAprarYeGRkjRkbmV3Vx8",
@@ -29,6 +31,7 @@ let  config = {
   appId: "1:717738907388:web:df692c38df4d03b8a7a979",
   measurementId: "G-Q535YNCX08"
 };
+firebase.initializeApp(config);
 
 
 @NgModule({
@@ -37,9 +40,8 @@ let  config = {
     FormsModule,
     HttpClientModule,
     ComponentsModule,
-    NgbModule,
-    AngularFireModule.initializeApp(config),
-    AngularFirestoreModule, // firestore
+    NgbModule,  
+    AngularFirestoreModule,
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     RouterModule,
@@ -51,7 +53,6 @@ let  config = {
     AuthLayoutComponent,
     SchoolFormComponent
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

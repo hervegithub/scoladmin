@@ -1,3 +1,4 @@
+import { SchoolServiceService } from './../../share/school-service/school-service.service';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -29,7 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TablesComponent,
     IconsComponent,
     MapsComponent,
-  ]
+  ],
 })
 
 export class AdminLayoutModule {}
