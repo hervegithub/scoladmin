@@ -19,36 +19,56 @@ export interface ecole {
 })
 export class TablesComponent implements OnInit {
 
-  ecoles:ecole[];
-  ecole1:ecole[];
-  rootRef= firebase.database().ref();
-  villes=["Douala", "Yaoundé" , "Bertoua", "Buea", "Bafoussam", "Kongssamba"];
-
-  constructor() { 
-    this.ecole1=[];
-    this.ecoles=[];
+  ecoles: ecole[];
+  ecole1: ecole[];
+  rootRef = firebase.database().ref();
+  villes = ["Douala", "Yaoundé", "Bertoua", "Buea", "Bafoussam", "Kongssamba"];
+  usersKey=[];
+  admins: any[];
+  adminsA: any[];
+  constructor() {
+    this.ecole1 = [];
+    this.ecoles = [];
+    this.adminsA = [];
   }
 
   ngOnInit() {
-    for(let i=0 ; i<this.villes.length ; i++){
-      this.rootRef.child('ecoles/'+this.villes[i]).once('value')
-      .then((data)=>{
-        if(data.val()!=null){
-          this.ecoles=data.val();
-          this.ecoles.forEach((value)=>{
-            console.log(value);
-            this.ecole1.push(value);
-            })
-        }
-        
-      }).catch((err)=>{
-        console.log(err);
-      });
-    }
-      
+    this.getAdmins();
+    this.getEcoles();
+
   }
 
-  
+  getEcoles() {
+    for (let i = 0; i < this.villes.length; i++) {
+      this.rootRef.child('ecoles/' + this.villes[i]).once('value')
+        .then((data) => {
+          if (data.val() != null) {
+            this.ecoles = data.val();
+            this.ecoles.forEach((value) => {
+              // console.log(value);
+              this.ecole1.push(value);
+            })
+          }
+
+        }).catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  getAdmins() {
+    firebase.database().ref().child("admins").once("value")
+      .then((data) => {
+        data.forEach((value) => {
+          this.usersKey.push(value.val());
+        })
+      }).catch((err) => {
+        //console.log(err);
+      })
+      console.log(this.usersKey);
+  }
+
+
 
 
 }

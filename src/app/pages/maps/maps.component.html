@@ -121,8 +121,9 @@
           </div>
           <div class="form-group">
             <label for="inputAddress2">Administrateur</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Nom de l'administrateur" [(ngModel)]="admin"
-            [ngModelOptions]="{standalone: true}">
+            <select id="inputState" class="form-control" [(ngModel)]="admin" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let user of usersKey">{{user.nom}} {{user.prenom}}</option>
+          </select>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
