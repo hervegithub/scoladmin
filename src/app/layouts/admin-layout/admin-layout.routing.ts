@@ -1,3 +1,4 @@
+import { LoginComponent } from './../../pages/login/login.component';
 //import { SchoolFormComponent } from '../../pages/school-form/school-form.component';
 import { Routes } from '@angular/router';
 
@@ -12,5 +13,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent }
+    { path: 'maps',           component: MapsComponent },
 ];

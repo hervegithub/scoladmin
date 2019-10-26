@@ -1,4 +1,6 @@
+import {ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ecole } from '../tables/tables.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  ecole:any;
+
+  constructor( private router : ActivatedRoute) { 
+    this.ecole={} as ecole;
+  }
 
   ngOnInit() {
+    this.ecole=this.router.paramMap.subscribe((data)=>{
+      console.log(data.get('id'));
+    })
   }
 
 }

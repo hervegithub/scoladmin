@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from "firebase";
 
@@ -23,10 +24,10 @@ export class TablesComponent implements OnInit {
   ecole1: ecole[];
   rootRef = firebase.database().ref();
   villes = ["Douala", "Yaoundé", "Bertoua", "Buea", "Bafoussam", "Kongssamba"];
-  usersKey=[];
+  usersKey = [];
   admins: any[];
   adminsA: any[];
-  constructor() {
+  constructor(private router: Router) {
     this.ecole1 = [];
     this.ecoles = [];
     this.adminsA = [];
@@ -65,7 +66,15 @@ export class TablesComponent implements OnInit {
       }).catch((err) => {
         //console.log(err);
       })
-      console.log(this.usersKey);
+    console.log(this.usersKey);
+  }
+
+  goToSigleSchoolPage(ecole:ecole) {
+    this.router.navigate(['user-profile', {ecole:ecole}]);
+  }
+
+  delateSchool(ecole) {
+
   }
 
 

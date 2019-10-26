@@ -1,3 +1,4 @@
+import { LoginComponent } from './pages/login/login.component';
 import { SchoolServiceService } from './share/school-service/school-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -51,7 +52,7 @@ firebase.initializeApp(config);
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    SchoolFormComponent
+    SchoolFormComponent,
   ],
   bootstrap: [AppComponent]
 })

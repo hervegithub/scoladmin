@@ -113,7 +113,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let ecole of ecole1;" >
+              <tr *ngFor="let ecole of ecole1;let i:index">
                 <th scope="row">
                   <div class="media align-items-center">
                     <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
@@ -142,9 +142,9 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)">Voir</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Modifier</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Supprimer</a>
+                      <a class="dropdown-item"  [routerLink]="['user-profile',{id:i}]">Voir</a>
+                      <a class="dropdown-item" (click)="goToSigleSchoolPage(ecole)">Modifier</a>
+                      <a class="dropdown-item" (click)="delateSchool(ecole)">Supprimer</a>
                     </div>
                   </div>
                 </td>
