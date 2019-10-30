@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare const google: any;
 import * as firebase from "firebase";
+import {SchoolServiceService} from '../../share/school-service/school-service.service';
 
 
 @Component({
@@ -23,54 +24,35 @@ export class MapsComponent implements OnInit {
 
   nombreEcole: number = 0;
   admins: any[];
-  usersKey = [];
+  usersKey: any = [];
 
-  constructor() {
-    let i = 0;
-    for (i = 0; i < this.villes.length; i++) {
-      firebase.database().ref().child("ecoles/" + this.villes[i]).once("value").then((data) => {
-        this.nombreEcole += data.numChildren();
-        console.log(data.numChildren())
-        //console.log(this.nombreEcole);
-      });
-    }
+  constructor( private ecoleService:  SchoolServiceService) {
     this.admins = [];
 
   }
 
   ngOnInit() {
+    this.ecoleService.getNomberOfEcole().then((data: number) => {
+      this.nombreEcole = data;
+    });
     this.getAdmins();
   }
 
   addSchool() {
-    firebase.database().ref().child("ecoles/" + this.city).once('value').then((data) => {
-      firebase.database().ref().child("ecoles/" + this.city + "/" + data.numChildren()).set({
-        name: this.name,
-        email: this.email,
-        telephone: this.telephone,
-        admin: this.admin,
-        location: this.location,
-        city: this.city,
-        type: this.type,
-        codePostal: this.codePostal,
-      }).then(() => {
-        console.log("Ecole ajoutée avec success !");
-      }).catch((err) => {
-        console.log("Une erreur c'est produite !" + err);
-      });
-    })
+    this.ecoleService.setSchoolOnFirebase(this.name, this.email, this.telephone, this.admin, this.location, this.city, this.type, this.codePostal)
+      .then(() => {
+        console.log('Ecole enregistrer avec succes');
+      }).catch(err => {
+        console.log(err);
+    });
   }
 
   getAdmins() {
-    firebase.database().ref().child("admins").once("value")
-      .then((data) => {
-        data.forEach((value) => {
-          this.usersKey.push(value.val());
-        })
-      }).catch((err) => {
-        //console.log(err);
-      })
-    console.log(this.usersKey);
+    this.ecoleService.etAdmins().then(data => {
+      this.usersKey = data;
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
 

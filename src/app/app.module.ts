@@ -20,7 +20,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { SchoolFormComponent } from './pages/school-form/school-form.component';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
+import {AuthService} from './share/auth/auth.service';
+import {AuthGuard} from './share/auth/authGuard';
 
 let  config = {
   apiKey: "AIzaSyD_CDzLe7ejPZXAprarYeGRkjRkbmV3Vx8",
@@ -41,12 +43,17 @@ firebase.initializeApp(config);
     FormsModule,
     HttpClientModule,
     ComponentsModule,
-    NgbModule,  
+    NgbModule ,
     AngularFirestoreModule,
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     RouterModule,
     AppRoutingModule
+  ],
+  providers: [
+    SchoolServiceService,
+    AuthService,
+    AuthGuard,
   ],
   declarations: [
     AppComponent,

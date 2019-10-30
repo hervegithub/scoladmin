@@ -1,16 +1,18 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import * as firebase from "firebase";
+import {SchoolServiceService} from '../../share/school-service/school-service.service';
 
 export interface ecole {
-  admin: string,
-  city: string,
-  codePostal: string,
-  email: string,
-  location: string,
-  name: string,
-  telephone: string,
-  type: string,
+  id?: number;
+  description: string;
+  admin: string;
+  city: string;
+  codePostal: string;
+  email: string;
+  location: string;
+  name: string;
+  telephone: string;
+  type: string;
 }
 
 @Component({
@@ -19,65 +21,29 @@ export interface ecole {
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-
-  ecoles: ecole[];
-  ecole1: ecole[];
-  rootRef = firebase.database().ref();
-  villes = ["Douala", "Yaoundé", "Bertoua", "Buea", "Bafoussam", "Kongssamba"];
-  usersKey = [];
-  admins: any[];
-  adminsA: any[];
-  constructor(private router: Router) {
-    this.ecole1 = [];
-    this.ecoles = [];
-    this.adminsA = [];
-  }
-
-  ngOnInit() {
-    this.getAdmins();
-    this.getEcoles();
-
-  }
-
-  getEcoles() {
-    for (let i = 0; i < this.villes.length; i++) {
-      this.rootRef.child('ecoles/' + this.villes[i]).once('value')
-        .then((data) => {
-          if (data.val() != null) {
-            this.ecoles = data.val();
-            this.ecoles.forEach((value) => {
-              // console.log(value);
-              this.ecole1.push(value);
-            })
-          }
-
-        }).catch((err) => {
-          console.log(err);
-        });
-    }
-  }
-
-  getAdmins() {
-    firebase.database().ref().child("admins").once("value")
-      .then((data) => {
-        data.forEach((value) => {
-          this.usersKey.push(value.val());
-        })
+  ecoles: any = [];
+  admins: any = [];
+  constructor(private router: Router, private serviceSchool: SchoolServiceService) {
+      this.serviceSchool.getEcoles().then((data) => {
+        this.ecoles = data;
       }).catch((err) => {
-        //console.log(err);
-      })
-    console.log(this.usersKey);
+        console.log(err);
+      });
+
+      this.serviceSchool.etAdmins().then((data) => {
+        this.admins = data;
+      }).catch((err) => {
+        console.log(err);
+      });
   }
 
-  goToSigleSchoolPage(ecole:ecole) {
-    this.router.navigate(['user-profile', {ecole:ecole}]);
+  ngOnInit() {}
+
+  goToSigleSchoolPage(id: any) {
+    const i = id + 1;
+    this.router.navigate(['user-profile', {i}]);
   }
 
-  delateSchool(ecole) {
-
+  delateSchool(eco: any) {
   }
-
-
-
-
 }

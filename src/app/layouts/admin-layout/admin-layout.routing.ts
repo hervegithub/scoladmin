@@ -1,5 +1,4 @@
 import { LoginComponent } from './../../pages/login/login.component';
-//import { SchoolFormComponent } from '../../pages/school-form/school-form.component';
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
